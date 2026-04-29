@@ -1,6 +1,4 @@
 var optionsApp = angular.module('optionsApp', ['ngRoute']);
-
-
 /*----------- Routes ----------------*/
 optionsApp.config(function($routeProvider){
   $routeProvider.when('/add-site', {
@@ -8,8 +6,6 @@ optionsApp.config(function($routeProvider){
   });
   $routeProvider.otherwise({});
 });
-
-
 /*----------- Services ----------------*/
 optionsApp.factory('chromeSync', function() {
   return {
@@ -24,9 +20,6 @@ optionsApp.factory('chromeSync', function() {
     }
   };
 });
-
-
-/*----------- Controllers ----------------*/
 optionsApp.controller('optionsController', function($scope, $route, $routeParams, $location, chromeSync, $timeout, $document) {
   $scope.whitelist = loadList();
   $scope.deleteSite = deleteSite;
@@ -34,13 +27,11 @@ optionsApp.controller('optionsController', function($scope, $route, $routeParams
   $scope.showAddNew = showAddNew;
   $scope.closeAddNew = closeAddNew;
   $scope.closeOptions = closeOptions;
-
   $document.bind("keyup", function(event) {
     if (event.keyCode == 27) {
       closeAddNew();
     }
   });
-
   function loadList() {
     var sites = [];
     chromeSync.get(function(items) {
@@ -49,18 +40,16 @@ optionsApp.controller('optionsController', function($scope, $route, $routeParams
           sites.push(key);
         }
       }
-      $scope.$digest(); //Force ang to check $scope for changes
+      $scope.$digest();
     });
     return sites;
   }
-
   function deleteSite() {
     var siteUrl = this.site;
     var index = $scope['whitelist'].findIndex( elem => elem === siteUrl );
     $scope['whitelist'].splice(index, 1);
     chromeSync.saveToSync(siteUrl, null, "deleted");
   }
-
   function addSite() {
     var siteUrl = this.newSiteBox;
     var skipHome = this.skipHomeCheckbox;
@@ -68,33 +57,28 @@ optionsApp.controller('optionsController', function($scope, $route, $routeParams
     if (skipHome) {
       saveFlag = "nohome";
     }
-
     chromeSync.saveToSync(siteUrl, function() {
       $scope.whitelist = loadList();
     }, saveFlag);
     $("#new-site").value = "";
     closeAddNew();
   }
-
   function showAddNew() {
-    $location.path("/add-site"); //same as window.location
+    $location.path("/add-site");
     $timeout(function () {
-      //Supposedly this runs on ondomready when no timer arg is given - seems like it works
+     
       $("#new-site").focus();
     });
   }
-
   function closeAddNew(event) {
-    //Prevent bubbling - really difficult in angular :(
+   
     if (!event || $(event.target).hasClass("lightbox") || $(event.target).hasClass("close") ) {
       window.location = "#";
     }
   }
-
   function closeOptions() {
     chrome.tabs.getCurrent( tab => {
       chrome.tabs.remove(tab.id);
     });
   }
-
 });

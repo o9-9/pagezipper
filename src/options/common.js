@@ -3,14 +3,11 @@ function saveChangeToList(siteUrl, callback, saveFlag) {
   if (saveFlag === undefined) saveFlag = 'domain'
   if (['deleted', 'domain', 'nohome'].indexOf(saveFlag) < 0)
     throw 'Invalid save flag'
-
-  //Update persistent storage
   var toGet = {}
   toGet['whitelist'] = {}
   chrome.storage.sync.get(toGet, function (items) {
     let currList = items['whitelist']
     currList[domain] = saveFlag
-
     var toSet = {}
     toSet['whitelist'] = currList
     chrome.storage.sync.set(toSet, function () {
@@ -18,7 +15,6 @@ function saveChangeToList(siteUrl, callback, saveFlag) {
     })
   })
 }
-
 function getFromList(url, callback) {
   var domain = getDomain(url),
     toGet = {}
@@ -27,7 +23,6 @@ function getFromList(url, callback) {
     callback(items['whitelist'][domain])
   })
 }
-
 function getDomain(url) {
   if (url.indexOf('http') !== 0) {
     url = 'https://' + url
@@ -35,23 +30,17 @@ function getDomain(url) {
   var a = document.createElement('a')
   a.href = url
   var domain = a.hostname
-
-  // Remove subdomain, if present
   if (domain.split('.').length > 2) {
     let splits = domain.split('.')
     domain = splits[splits.length - 2] + '.' + splits[splits.length - 1]
   }
-
   return domain
 }
-
 function isActiveDomain(domainValue) {
   return domainValue == 'domain' || domainValue == 'nohome'
 }
-
 function is_homepage(url) {
   var a = document.createElement('a')
   a.href = url
   return a.pathname == '/'
 }
-

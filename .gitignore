@@ -1,6 +1,2 @@
-/compiled
 /dist
-.tags*
 /node_modules
-src/ffextension
-PAGEZIPPER_FILES.md

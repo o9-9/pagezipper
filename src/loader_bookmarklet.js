@@ -3,7 +3,7 @@ function _pgzpInitBookmarklet() {
   pgzp.win = window;
   pgzp.doc = window.document;
   pgzp.loader_type = "bookmarklet";
-  pgzp.media_path = "https://o9ll.com/static/pagezipper/ui/";
+  pgzp.media_path = "https://raw.githubusercontent.com/o9-9/pagezipper/refs/heads/main/img/";
   pgzp.loadPageZipper();
 }
 _pgzpInitBookmarklet();

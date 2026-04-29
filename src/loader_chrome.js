@@ -1,4 +1,3 @@
-/*------------------------- Load Chrome Extension ----------------------*/
 function _pgzpInitExtension() {
   window.pgzp = new PageZipper()
   pgzp.win = window

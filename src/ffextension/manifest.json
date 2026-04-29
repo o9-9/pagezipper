@@ -3,20 +3,24 @@
   "name": "PageZipper",
   "version": "1.5.1",
   "description": "Painlessly merge a series of web pages into one.",
-  "homepage_url": "https://o9ll.com/pagezipper",
+  "homepage_url": "https://github.com/o9-9/pagezipper",
   "options_ui": {
     "page": "options/options.html",
     "open_in_tab": true
   },
   "icons": {
     "16": "icons/16.png",
+    "19": "icons/19.png",
+    "32": "icons/32.png",
+    "38": "icons/38.png",
     "48": "icons/48.png",
+    "96": "icons/96.png",
     "128": "icons/128.png"
   },
 
   "applications": {
     "gecko": {
-      "id": "pagezipper@o9ll.com",
+      "id": "com@o99.zipper",
       "strict_min_version": "48.0",
       "strict_max_version": "*"
     }
