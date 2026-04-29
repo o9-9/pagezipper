@@ -1,5 +1,9 @@
 {
   "name": "pagezipper",
+  "scripts": {
+    "build": "gulp",
+    "prod": "gulp prod"
+  },
   "dependencies": {
     "gulp": "^3.9.1"
   },
@@ -12,12 +16,15 @@
     "gulp-if": "^2.0.1",
     "gulp-uglify": "^2.0.0"
   },
+  "overrides": {
+    "graceful-fs": "^4.2.0"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jkoomjian/PageZipper.git"
+    "url": "git+https://github.com/o9-9/PageZipper.git"
   },
   "bugs": {
-    "url": "https://github.com/jkoomjian/PageZipper/issues"
+    "url": "https://github.com/o9-9/PageZipper/issues"
   },
-  "homepage": "https://github.com/jkoomjian/PageZipper#readme"
+  "homepage": "https://github.com/o9-9/PageZipper#readme"
 }

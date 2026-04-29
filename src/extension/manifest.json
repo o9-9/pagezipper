@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "PageZipper",
+  "version": "1.5.2",
+  "description": "Painlessly merge a series of web pages into one",
+  "homepage_url": "https://github.com/o9-9/pagezipper/blob/master/README.md",
+  "options_page": "options/options.html",
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "action": {
+    "default_title": "PageZipper",
+    "default_icon": {
+      "19": "icons/19.png",
+      "38": "icons/38.png"
+    }
+  },
+  "permissions": ["tabs", "activeTab", "storage", "webNavigation", "scripting"],
+  "host_permissions": ["https://*/*"],
+  "background": {
+    "service_worker": "service_worker.js"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["pagezipper.js", "icons/*"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

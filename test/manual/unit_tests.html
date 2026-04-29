@@ -1,76 +1,80 @@
 <html>
+
 <head>
-	<script type="text/javascript">
-		var _page_zipper_is_bookmarklet = true;
-	</script>
-	<script type="text/javascript" src="/pwyl/test/web/js/unit_test_lib.js"></script>
+  <script type="text/javascript">
+    var _page_zipper_is_bookmarklet = true;
+  </script>
+  <script type="text/javascript" src="/pwyl/test/web/js/unit_test_lib.js"></script>
 </head>
+
 <body>
-	<div id="abs1" style="position:absolute;top:100px;left:100px;border:1px dotted red;">absolute</div>
-	<div id="static1">static</div>
+  <div id="abs1" style="position:absolute;top:100px;left:100px;border:1px dotted red;">absolute</div>
+  <div id="static1">static</div>
 
 
-<script type="text/javascript">
+  <script type="text/javascript">
 
-/*------------ Tests ---------------*/
+    /*------------ Tests ---------------*/
 
-function testUrlsEndsInNumber() {
-	var url1 = "http://www.zeit.de/zeit-wissen/2009/02/3D-Fernsehen#exklusivData";
-	var url2 = "http://www.zeit.de/zeit-wissen/2009/02/3D-Fernsehen?page=2";
-	var url3 = "http://www.zeit.de/zeit-wissen/2009/02/3D-Fernsehen/page2.html";
-	assertEquals(0, url3.search(/^.*?\d(\/+|\.\w+)?$/));
-}
+    function testUrlsEndsInNumber() {
+      var url1 = "https://zeit.de/zeit-wissen/2009/02/3D-Fernsehen#exklusivData";
+      var url2 = "https://zeit.de/zeit-wissen/2009/02/3D-Fernsehen?page=2";
+      var url3 = "https://zeit.de/zeit-wissen/2009/02/3D-Fernsehen/page2.html";
+      assertEquals(0, url3.search(/^.*?\d(\/+|\.\w+)?$/));
+    }
 
-function testHumanReadableSyn() {
-	var tests = "2005";
-	var syn = "2";
-	var re = new RegExp("^(.*\\s+)?" + syn + "(\\s+.*)?$");
-	assertEquals(re.test("2005"), false);
-	assertEquals(re.test("page2"), false);
-	assertEquals(re.test("2page"), false);
-	assertEquals(re.test("2"), true);
-	assertEquals(re.test("  2  "), true);
-	assertEquals(re.test("page 2"), true);
-	assertEquals(re.test("2 ->"), true);
-}
+    function testHumanReadableSyn() {
+      var tests = "2005";
+      var syn = "2";
+      var re = new RegExp("^(.*\\s+)?" + syn + "(\\s+.*)?$");
+      assertEquals(re.test("2005"), false);
+      assertEquals(re.test("page2"), false);
+      assertEquals(re.test("2page"), false);
+      assertEquals(re.test("2"), true);
+      assertEquals(re.test("  2  "), true);
+      assertEquals(re.test("page 2"), true);
+      assertEquals(re.test("2 ->"), true);
+    }
 
-function testIsReallyANumber() {
-	var a = "http://www.example.com/2342";
-	var b = "http://www.example.com/2";
-	var c = "http://www.example.com/?page=2342";
-	var d = "http://www.example.com/?page=42";
-	var e = "http://www.example.com/adf2342.html";
-	var f = "http://www.example.com/adf34.html";
-	var g = "http://www.example.com/2342/hello.html";
-	var results = a.match(/^.*?(\d+)(\/+|\.\w+)?$/);
-	assertEquals(results[1], "2342");
-	assertEquals( (parseInt(results[1], 10) < 99), false);
-	results = b.match(/^.*?(\d+)(\/+|\.\w+)?$/);
-	assertEquals(results[1], "2");
-	assertEquals( (parseInt(results[1], 10) < 99), true);
-	results = c.match(/^.*?(\d+)(\/+|\.\w+)?$/);
-	assertEquals(results[1], "2342");
-	assertEquals( (parseInt(results[1], 10) < 99), false);
-	results = d.match(/^.*?(\d+)(\/+|\.\w+)?$/);
-	assertEquals(results[1], "42");
-	assertEquals( (parseInt(results[1], 10) < 99), true);
-	results = e.match(/^.*?(\d+)(\/+|\.\w+)?$/);
-	assertEquals(results[1], "2342");
-	assertEquals( (parseInt(results[1], 10) < 99), false);
-	results = f.match(/^.*?(\d+)(\/+|\.\w+)?$/);
-	assertEquals(results[1], "34");
-	assertEquals( (parseInt(results[1], 10) < 99), true);
-	results = g.match(/^.*?(\d+)(\/+|\.\w+)?$/);
-	assertNull(results);
-}
+    function testIsReallyANumber() {
+      var a = "https://example.com/2342";
+      var b = "https://example.com/2";
+      var c = "https://example.com/?page=2342";
+      var d = "https://example.com/?page=42";
+      var e = "https://example.com/adf2342.html";
+      var f = "https://example.com/adf34.html";
+      var g = "https://example.com/2342/hello.html";
+      var results = a.match(/^.*?(\d+)(\/+|\.\w+)?$/);
+      assertEquals(results[1], "2342");
+      assertEquals((parseInt(results[1], 10) < 99), false);
+      results = b.match(/^.*?(\d+)(\/+|\.\w+)?$/);
+      assertEquals(results[1], "2");
+      assertEquals((parseInt(results[1], 10) < 99), true);
+      results = c.match(/^.*?(\d+)(\/+|\.\w+)?$/);
+      assertEquals(results[1], "2342");
+      assertEquals((parseInt(results[1], 10) < 99), false);
+      results = d.match(/^.*?(\d+)(\/+|\.\w+)?$/);
+      assertEquals(results[1], "42");
+      assertEquals((parseInt(results[1], 10) < 99), true);
+      results = e.match(/^.*?(\d+)(\/+|\.\w+)?$/);
+      assertEquals(results[1], "2342");
+      assertEquals((parseInt(results[1], 10) < 99), false);
+      results = f.match(/^.*?(\d+)(\/+|\.\w+)?$/);
+      assertEquals(results[1], "34");
+      assertEquals((parseInt(results[1], 10) < 99), true);
+      results = g.match(/^.*?(\d+)(\/+|\.\w+)?$/);
+      assertNull(results);
+    }
 
-function testRemoveAbsolutePositioning() {
-	//remove abs positioning called when pgzp loaded
-	assertEquals( pgzp.jq("#abs1").css("position"), "static");
-	assertEquals( pgzp.jq("#static1").css("position"), "static");
-}
+    function testRemoveAbsolutePositioning() {
+      //remove abs positioning called when pgzp loaded
+      assertEquals(pgzp.jq("#abs1").css("position"), "static");
+      assertEquals(pgzp.jq("#static1").css("position"), "static");
+    }
 
-</script>
+  </script>
 
-<script type="text/javascript" src="/pgzp/compiled/pagezipper_10.js"></script>
-</body></html>
+  <script type="text/javascript" src="/pgzp/compiled/pagezipper_10.js"></script>
+</body>
+
+</html>
